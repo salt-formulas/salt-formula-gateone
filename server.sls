@@ -79,4 +79,11 @@ gateone_service:
     - file: /opt/gateone/logs
     - file: /opt/gateone/server.conf
 
+init_gateone_run:
+  cmd.run:
+  - name: sudo update-rc.d gateone defaults 21
+  - cwd: /root
+  - require:
+    - service: gateone_service
+
 {%- endif %}
