@@ -45,20 +45,10 @@ gateone_package:
   - require:
     - cmd: download_package
 
-{#
-install_package:
-  cmd.run:
-  - name: sudo dpkg -i gateone_1.1-1_all.deb
-  - cwd: /root
-  - require:
-    - cmd: download_package
-#}
-
 {%- endif %}
 
 /opt/gateone/server.conf:
-  file:
-  - managed
+  file.managed:
   - source: salt://gateone/conf/server.conf
   - template: jinja
   - require:
@@ -75,15 +65,9 @@ install_package:
 gateone_service:
   service.running:
   - name: gateone
+  - enable: True
   - require:
     - file: /opt/gateone/logs
     - file: /opt/gateone/server.conf
-
-init_gateone_run:
-  cmd.run:
-  - name: sudo update-rc.d gateone defaults 21
-  - cwd: /root
-  - require:
-    - service: gateone_service
 
 {%- endif %}
