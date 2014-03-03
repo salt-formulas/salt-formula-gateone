@@ -68,6 +68,7 @@ gateone_service:
   - enable: True
   - require:
     - file: /opt/gateone/logs
+  - watch:
     - file: /opt/gateone/server.conf
 
 {%- endif %}
