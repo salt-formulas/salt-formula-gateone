@@ -1,0 +1,5 @@
+{%- set server = salt['grains.filter_by']({
+  'Debian': {
+    'pkgs': ['dtach', 'python-openssl', 'python-kerberos', 'python-imaging'],
+  },
+}, merge=salt['pillar.get']('gateone:server')) %}

@@ -1,6 +1,5 @@
-{% set os_family = salt['grains.item']('os_family')['os_family'] %}
-
-{%- if pillar.gateone.server.enabled %}
+{%- from "gateone/map.jinja" import server with context %}
+{%- if server.enabled %}
 
 include:
 - python
@@ -12,14 +11,6 @@ gateone_tornado_package:
   - require:
     - pkg: python_packages
 
-{#
-kerberos:
-  pip.installed:
-  - version: 1.1.1
-  - require:
-    - pkg: python-pip
-#}
-
 gateone_packages:
   pkg.installed:
   - names:
@@ -30,7 +21,7 @@ gateone_packages:
   - require:
     - pip: gateone_tornado_package
 
-{%- if os_family == 'Debian' %}
+{%- if grains.os_family == 'Debian' %}
 
 download_package:
   cmd.run:
@@ -49,7 +40,7 @@ gateone_package:
 
 /opt/gateone/server.conf:
   file.managed:
-  - source: salt://gateone/conf/server.conf
+  - source: salt://gateone/files/server.conf
   - template: jinja
   - require:
     - pkg: gateone_package
