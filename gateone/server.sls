@@ -49,7 +49,7 @@ gateone_service:
 
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh:
   file.directory:
-  - make_dirs: true
+  - makedirs: true
 
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key:
   file.managed:
