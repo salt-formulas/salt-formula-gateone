@@ -2,5 +2,8 @@
   'Debian': {
     'pkgs': ['dtach', 'python-openssl', 'python-kerberos', 'python-imaging'],
     'origins': [],
+    'auth': {
+      'engine': 'pam',
+    }
   },
 }, merge=salt['pillar.get']('gateone:server')) %}
