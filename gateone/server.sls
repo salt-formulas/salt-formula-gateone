@@ -21,9 +21,16 @@ gateone_install:
   - require:
     - git: gateone_source
 
-/etc/gateone/10server.conf:
+/etc/gateone/conf.d/10server.conf:
   file.managed:
   - source: salt://gateone/files/10server.conf
+  - template: jinja
+  - require:
+    - cmd: gateone_install
+
+/etc/gateone/conf.d/20authentication.conf:
+  file.managed:
+  - source: salt://gateone/files/20authentication.conf
   - template: jinja
   - require:
     - cmd: gateone_install
@@ -34,5 +41,6 @@ gateone_service:
   - enable: True
   - watch:
     - file: /etc/gateone/10server.conf
+    - file: /etc/gateone/20authentication.conf
 
 {%- endif %}
