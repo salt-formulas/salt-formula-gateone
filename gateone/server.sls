@@ -6,7 +6,7 @@ include:
 
 gateone_source:
   git.latest:
-  - name: {{ storage.source.address }}
+  - name: https://github.com/liftoff/GateOne.git
   - target: /root/GateOne
   - rev: master
   - require:
