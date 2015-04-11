@@ -60,5 +60,6 @@ gateone_service:
   - contents_pillar: gateone:server:public_key
 
 {%- endfor %}
+{%- endif %}
 
 {%- endif %}
