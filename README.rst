@@ -8,7 +8,7 @@ Gate One is an open source, web-based terminal emulator with a powerful plugin s
 Support
 =======
 
-* service versions: 1.1
+* service versions: 1.2
 * operating systems: Ubuntu 12.04
 
 Sample pillars
@@ -21,7 +21,9 @@ Sample pillars
         address: '0.0.0.0'
         port: 8888
         protocol: 'tcp'
-      pam_realm: master1
+      auth:
+        engine: pam
+        realm: local
 
 Read more
 =========
