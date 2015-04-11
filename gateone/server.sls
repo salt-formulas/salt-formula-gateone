@@ -1,3 +1,4 @@
+{%- from "linux/map.jinja" import system with context %}
 {%- from "gateone/map.jinja" import server with context %}
 {%- if server.enabled %}
 
@@ -42,5 +43,22 @@ gateone_service:
   - watch:
     - file: /etc/gateone/conf.d/10server.conf
     - file: /etc/gateone/conf.d/20authentication.conf
+
+{%- if server.private_key is defined 
+{%- for user_name, user in system.user.iteritems() %}
+
+/var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh:
+  file.directory:
+  - make_dirs: true
+
+/var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key:
+  file.managed:
+  - contents_pillar: gateone:server:private_key
+
+/var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key.pub:
+  file.managed:
+  - contents_pillar: gateone:server:public_key
+
+{%- endfor %}
 
 {%- endif %}

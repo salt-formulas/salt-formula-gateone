@@ -10,3 +10,6 @@ parameters:
     auth:
       engine: pam
       realm: local
+    private_key: |
+      -----BEGIN EC PRIVATE KEY-----
+      -----END EC PRIVATE KEY-----
