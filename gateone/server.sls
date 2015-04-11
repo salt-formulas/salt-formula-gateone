@@ -3,6 +3,7 @@
 
 include:
 - python
+- git
 
 gateone_source:
   git.latest:
@@ -10,7 +11,6 @@ gateone_source:
   - target: /root/GateOne
   - rev: master
   - require:
-    - pkg: gateone_packages
     - pkg: git_packages
 
 gateone_install:
