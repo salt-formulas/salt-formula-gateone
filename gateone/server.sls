@@ -54,6 +54,7 @@ gateone_service:
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key:
   file.managed:
   - contents_pillar: gateone:server:private_key
+  - mode: 400
 
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key.pub:
   file.managed:
