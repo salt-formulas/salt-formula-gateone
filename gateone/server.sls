@@ -44,7 +44,7 @@ gateone_service:
     - file: /etc/gateone/conf.d/10server.conf
     - file: /etc/gateone/conf.d/20authentication.conf
 
-{%- if server.private_key is defined 
+{%- if server.private_key is defined %}
 {%- for user_name, user in system.user.iteritems() %}
 
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh:
