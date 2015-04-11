@@ -40,7 +40,7 @@ gateone_service:
   - name: gateone
   - enable: True
   - watch:
-    - file: /etc/gateone/10server.conf
-    - file: /etc/gateone/20authentication.conf
+    - file: /etc/gateone/conf.d/10server.conf
+    - file: /etc/gateone/conf.d/20authentication.conf
 
 {%- endif %}
