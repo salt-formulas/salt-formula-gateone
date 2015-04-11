@@ -23,7 +23,7 @@ gateone_install:
 
 /etc/gateone/10server.conf:
   file.managed:
-  - source: salt://gateone/files/server.conf
+  - source: salt://gateone/files/10server.conf
   - template: jinja
   - require:
     - cmd: gateone_install
