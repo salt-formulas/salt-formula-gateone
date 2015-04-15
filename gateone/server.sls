@@ -22,19 +22,25 @@ gateone_install:
   - require:
     - git: gateone_source
 
+/etc/gateone/conf.d:
+  file.directory:
+  - makedirs: true
+  - require:
+    - cmd: gateone_install
+
 /etc/gateone/conf.d/10server.conf:
   file.managed:
   - source: salt://gateone/files/10server.conf
   - template: jinja
   - require:
-    - cmd: gateone_install
+    - file: /etc/gateone/conf.d
 
 /etc/gateone/conf.d/20authentication.conf:
   file.managed:
   - source: salt://gateone/files/20authentication.conf
   - template: jinja
   - require:
-    - cmd: gateone_install
+    - file: /etc/gateone/conf.d
 
 gateone_service:
   service.running:
@@ -54,7 +60,7 @@ gateone_service:
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key:
   file.managed:
   - contents_pillar: gateone:server:private_key
-  - mode: 400
+  - mode: 400 
 
 /var/lib/gateone/users/{{ user_name }}@{{ system.name }}/.ssh/key.pub:
   file.managed:
