@@ -1,0 +1,9 @@
+doc:
+  name: Gateone
+  description: Gate One is an open source, web-based terminal emulator with a powerful plugin system.
+  role:
+  {%- if pillar.gateone.server is defined %}
+    server:
+      name: server
+      param: {}
+  {%- endif %}
